@@ -12,7 +12,9 @@ var usersRouter = require('./routes/users');
 var catalogRouter = require('./routes/catalog');
 
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://admin:admin@cluster0-zvwfh.mongodb.net/test?retryWrites=true&w=majority';
+var dev_db_url = 'mongodb+srv://admin:admin@cluster0-zvwfh.mongodb.net/test?retryWrites=true&w=majority';
+var mongoDB = process.env.MONGODB_URI || dev_db_url;
+
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
